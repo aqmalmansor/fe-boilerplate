@@ -6,6 +6,7 @@ import { ToastContainer } from "react-toastify";
 
 import App from "./App.tsx";
 
+import "assets/styles/index.css";
 import "react-toastify/dist/ReactToastify.css";
 
 const queryClient = new QueryClient({

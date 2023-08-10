@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React from "react";
 import { motion } from "framer-motion";
 import {
@@ -35,8 +34,8 @@ const ROUNDED_VARIANT: Record<ROUNDED, string> = {
   [ROUNDED.NORMAL]: "rounded",
   [ROUNDED.LARGE]: "rounded-lg",
   [ROUNDED.XL]: "rounded-xl",
-  [ROUNDED.XXL]: "rounded-xxl",
-  [ROUNDED.XXXL]: "rounded-xxxl",
+  [ROUNDED.XXL]: "rounded-2xl",
+  [ROUNDED.XXXL]: "rounded-3xl",
   [ROUNDED.FULL]: "rounded-full",
 };
 
@@ -134,25 +133,24 @@ const Button = ({
   const borderRounded =
     rounded !== undefined
       ? ROUNDED_VARIANT[rounded]
-      : ROUNDED_VARIANT[ROUNDED.FULL];
+      : ROUNDED_VARIANT[ROUNDED.XXXL];
 
   // Paddings
   const buttonYPadding =
     yPadding !== undefined
       ? YPADDING_VARIANT[yPadding]
-      : YPADDING_VARIANT[SPACING.default];
+      : YPADDING_VARIANT[SPACING.extraSmall];
   const buttonXPadding =
     xPadding !== undefined
       ? XPADDING_VARIANT[xPadding]
-      : XPADDING_VARIANT[SPACING.default];
+      : XPADDING_VARIANT[SPACING.large];
   const buttonPadding = noPadding ? "" : `${buttonXPadding} ${buttonYPadding}`;
 
   // Button Color
-  const buttonColor = type
-    ? BUTTON_VARIANT[BUTTON.primary]
-    : BUTTON_VARIANT[type];
+  const buttonColor =
+    type === undefined ? BUTTON_VARIANT[BUTTON.primary] : BUTTON_VARIANT[type];
 
-  const buttonHeight = height ?? "min-h-[1rem]"; // Button Area -> Height
+  const buttonHeight = height ?? "h-fit"; // Button Area -> Height
 
   const buttonWidth = width ?? "min-w-fit"; // Button Area -> Width
   const buttonFullWidth = fill ? "w-full" : buttonWidth;
@@ -166,7 +164,7 @@ const Button = ({
 
   // Final Classname
   const newClassName =
-    `min-h-[1.6rem] ${buttonSpacing.trim()} ${align} ${buttonColor.trim()} 
+    `${buttonSpacing.trim()} ${align} ${buttonColor.trim()} 
     ${TEXT_ALIGN_VARIANTS[align]} ${addOn} ${borderRounded.trim()}`.trim();
 
   return (
