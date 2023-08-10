@@ -16,13 +16,15 @@ interface ButtonComponentProps {
   onClick?: () => void;
   label?: string | React.ReactNode;
   isLoading?: boolean;
-  type?: BUTTON | string;
+  type?: BUTTON;
   align?: TEXT_ALIGN;
   salt?: React.ComponentProps<"div">["className"];
   noPadding?: boolean;
   yPadding?: SPACING;
   xPadding?: SPACING;
   rounded?: ROUNDED;
+  height?: string;
+  width?: string;
 }
 
 const ROUNDED_VARIANT: Record<ROUNDED, string> = {
@@ -39,9 +41,9 @@ const ROUNDED_VARIANT: Record<ROUNDED, string> = {
 };
 
 const BUTTON_VARIANT: Record<BUTTON, string> = {
-  [BUTTON.primary]: "bg-primary text-secondary",
-  [BUTTON.secondary]: "bg-secondary text-primary",
-  [BUTTON.clear]: "",
+  [BUTTON.primary]: "bg-primary text-white",
+  [BUTTON.secondary]: "bg-secondary text-white",
+  [BUTTON.reset]: "",
 };
 
 const Button = ({
@@ -56,6 +58,8 @@ const Button = ({
   yPadding,
   xPadding,
   rounded,
+  height,
+  width,
   ...props
 }: ButtonComponentProps): JSX.Element => {
   const renderButtonContent = () => {
@@ -65,7 +69,7 @@ const Button = ({
           switch (buttonType) {
             case BUTTON.primary:
               return "dark:text-gray-100";
-            case BUTTON.clear:
+            case BUTTON.reset:
               return "dark:text-gray-300";
             case BUTTON.secondary:
               return "dark:text-gray-300";
@@ -126,10 +130,13 @@ const Button = ({
     return label;
   };
 
+  // Border Radius
   const borderRounded =
     rounded !== undefined
       ? ROUNDED_VARIANT[rounded]
       : ROUNDED_VARIANT[ROUNDED.FULL];
+
+  // Paddings
   const buttonYPadding =
     yPadding !== undefined
       ? YPADDING_VARIANT[yPadding]
@@ -139,20 +146,30 @@ const Button = ({
       ? XPADDING_VARIANT[xPadding]
       : XPADDING_VARIANT[SPACING.default];
   const buttonPadding = noPadding ? "" : `${buttonXPadding} ${buttonYPadding}`;
-  const buttonWidth = fill ? "w-full" : "min-w-[150px]";
-  const buttonColor = typeof type === "string" ? type : BUTTON_VARIANT[type];
-  const buttonSpacing =
-    typeof type === "string" ? "" : `${buttonWidth} ${buttonPadding.trim()}`;
+
+  // Button Color
+  const buttonColor = type
+    ? BUTTON_VARIANT[BUTTON.primary]
+    : BUTTON_VARIANT[type];
+
+  const buttonHeight = height ?? "min-h-[1rem]"; // Button Area -> Height
+
+  const buttonWidth = width ?? "min-w-fit"; // Button Area -> Width
+  const buttonFullWidth = fill ? "w-full" : buttonWidth;
+  const buttonArea = `${buttonHeight} ${buttonFullWidth}`; // Button Area - Width x Height
+
+  // Button Spacing
+  const buttonSpacing = `${buttonArea} ${buttonPadding.trim()}`;
 
   const addOn = salt !== undefined ? salt.trim() : "";
   const newClassName =
-    `min-h-[1.6rem] rounded-md ${buttonSpacing.trim()} ${align} ${buttonColor.trim()} 
+    `min-h-[1.6rem] ${buttonSpacing.trim()} ${align} ${buttonColor.trim()} 
     ${TEXT_ALIGN_VARIANTS[align]} ${addOn} ${borderRounded.trim()}`.trim();
 
   return (
     <motion.button
       type="button"
-      className={newClassName}
+      className={type === BUTTON.reset ? addOn : newClassName}
       onClick={onClick}
       disabled={isLoading}
       whileHover={{ scale: 1.05 }}
@@ -176,6 +193,8 @@ Button.defaultProps = {
   yPadding: undefined,
   xPadding: undefined,
   rounded: undefined,
+  height: undefined,
+  width: undefined,
 };
 
 export default Button;
