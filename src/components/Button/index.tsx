@@ -161,7 +161,10 @@ const Button = ({
   // Button Spacing
   const buttonSpacing = `${buttonArea} ${buttonPadding.trim()}`;
 
+  // Custom Tailwind Styles
   const addOn = salt !== undefined ? salt.trim() : "";
+
+  // Final Classname
   const newClassName =
     `min-h-[1.6rem] ${buttonSpacing.trim()} ${align} ${buttonColor.trim()} 
     ${TEXT_ALIGN_VARIANTS[align]} ${addOn} ${borderRounded.trim()}`.trim();

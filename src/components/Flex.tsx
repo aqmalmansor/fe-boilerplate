@@ -15,6 +15,7 @@ import {
 } from "entities/tailwind";
 
 interface FlexComponentProps {
+  id?: string;
   children: React.ReactNode;
   fill?: boolean;
   noPadding?: boolean;
@@ -30,6 +31,7 @@ interface FlexComponentProps {
 }
 
 const Flex = ({
+  id,
   children,
   fill,
   noPadding,
@@ -85,20 +87,21 @@ const Flex = ({
         return "flex-row";
     }
   };
+  const containerFlexDirection = flexDirection(direction);
 
-  const newClass = `${fillContainer} ${justifyContent} ${alignItems} ${flexDirection(
-    direction
-  )} ${containerGap} ${containerPadding.trim()} ${containerSalt.trim()}`;
+  const newClass = `${fillContainer} ${justifyContent} ${alignItems} ${containerFlexDirection}
+   ${containerGap} ${containerPadding.trim()} ${containerSalt.trim()}`;
 
   if (stagger) {
     return (
       <motion.div
-        variants={Motion.staggerContainer(0.3, 1)}
+        id={id}
+        style={style}
         initial="hidden"
         whileInView="show"
-        viewport={{ once: true, amount: 0.1 }}
         className={newClass.trim()}
-        style={style}
+        viewport={{ once: true, amount: 0.1 }}
+        variants={Motion.staggerContainer(0.3, 1)}
       >
         {children}
       </motion.div>
@@ -106,7 +109,7 @@ const Flex = ({
   }
 
   return (
-    <div className={newClass.trim()} style={style}>
+    <div id={id} className={newClass.trim()} style={style}>
       {children}
     </div>
   );
@@ -115,6 +118,7 @@ const Flex = ({
 export default Flex;
 
 Flex.defaultProps = {
+  id: undefined,
   fill: true,
   noPadding: false,
   stagger: false,
