@@ -22,8 +22,8 @@ interface ButtonComponentProps {
   yPadding?: SPACING;
   xPadding?: SPACING;
   rounded?: ROUNDED;
-  height?: string;
-  width?: string;
+  height?: React.ComponentProps<"div">["className"];
+  width?: React.ComponentProps<"div">["className"];
 }
 
 const ROUNDED_VARIANT: Record<ROUNDED, string> = {
