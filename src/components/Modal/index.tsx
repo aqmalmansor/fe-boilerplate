@@ -8,6 +8,7 @@ import Backdrop from "./Backdrop";
 import Motion from "utils/Motion";
 
 import icons from "assets/icons";
+import { BUTTON } from "entities/tailwind";
 
 interface ModalComponentProps {
   variants?: Variants;
@@ -43,7 +44,8 @@ const Modal = ({
               <SVG src={icons.closeSVG} fill="#7E7E7E" width={20} height={20} />
             }
             fill={false}
-            type="p-3 inline-flex items-center justify-center cursor-pointer"
+            type={BUTTON.reset}
+            salt="p-3 inline-flex items-center justify-center cursor-pointer"
             onClick={() => onClick()}
           />
         </div>
