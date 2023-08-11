@@ -7,13 +7,7 @@ yarn && yarn dev
 Important note - Download Prettier plugin on VSCODE and configure project settings file to enable format on save
 
 ```
-  "eslint.format.enable": true,
-  "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.codeActionsOnSave": {
-    "source.fixAll": false,
-  },
-
 ```
 
 # React + TypeScript + Vite

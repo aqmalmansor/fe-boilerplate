@@ -97,7 +97,7 @@ const Button = ({
                 fill="currentFill"
               />
             </svg>
-            <span className="sr-only">Loading...</span>
+            <span className="sr-only">Loading ...</span>
           </div>
         );
       }
@@ -163,8 +163,7 @@ const Button = ({
   const addOn = salt !== undefined ? salt.trim() : "";
 
   // Final Classname
-  const newClassName =
-    `${buttonSpacing.trim()} ${align} ${buttonColor.trim()} 
+  const newClassName = `${buttonSpacing.trim()} ${align} ${buttonColor.trim()} 
     ${TEXT_ALIGN_VARIANTS[align]} ${addOn} ${borderRounded.trim()}`.trim();
 
   return (
