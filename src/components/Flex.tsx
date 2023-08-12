@@ -1,18 +1,19 @@
-import React from "react";
-import { motion } from "framer-motion";
+import React from 'react';
 
-import Motion from "utils/Motion";
+import { motion } from 'framer-motion';
 
 import {
-  JUSTIFY_CONTENT,
   ALIGN_ITEMS,
-  JUSTIFY_CONTENT_VARIANT,
   ALIGN_ITEMS_VARIANT,
+  GAP_VARIANT,
+  JUSTIFY_CONTENT,
+  JUSTIFY_CONTENT_VARIANT,
   SPACING,
   XPADDING_VARIANT,
   YPADDING_VARIANT,
-  GAP_VARIANT,
-} from "entities/tailwind";
+} from 'entities/tailwind';
+
+import Motion from 'utils/Motion';
 
 interface FlexComponentProps {
   id?: string;
@@ -23,9 +24,9 @@ interface FlexComponentProps {
   yPadding?: SPACING;
   justify?: JUSTIFY_CONTENT;
   align?: ALIGN_ITEMS;
-  direction?: "row" | "column" | "column-reverse" | "row-reverse";
+  direction?: 'row' | 'column' | 'column-reverse' | 'row-reverse';
   gap?: SPACING;
-  salt?: React.ComponentProps<"div">["className"];
+  salt?: React.ComponentProps<'div'>['className'];
   stagger?: boolean;
   style?: React.CSSProperties;
 }
@@ -45,7 +46,7 @@ const Flex = ({
   stagger,
   style,
 }: FlexComponentProps): JSX.Element => {
-  const fillContainer = fill ? "flex w-full h-full" : "inline-flex";
+  const fillContainer = fill ? 'flex w-full h-full' : 'inline-flex';
 
   const containerXPadding =
     xPadding !== undefined
@@ -56,7 +57,7 @@ const Flex = ({
       ? YPADDING_VARIANT[yPadding]
       : YPADDING_VARIANT[SPACING.default];
   const containerDefaultPadding = `${containerXPadding} ${containerYPadding}`;
-  const containerPadding = noPadding ? "" : containerDefaultPadding.trim();
+  const containerPadding = noPadding ? '' : containerDefaultPadding.trim();
 
   const justifyContent =
     justify !== undefined
@@ -71,20 +72,20 @@ const Flex = ({
   const containerGap =
     gap !== undefined ? GAP_VARIANT[gap] : GAP_VARIANT[SPACING.default];
 
-  const containerSalt = salt !== undefined ? salt : "";
+  const containerSalt = salt !== undefined ? salt : '';
 
-  const flexDirection = (dir: FlexComponentProps["direction"]) => {
+  const flexDirection = (dir: FlexComponentProps['direction']) => {
     switch (dir) {
-      case "row":
-        return "flex-row";
-      case "column":
-        return "flex-col";
-      case "column-reverse":
-        return "flex-col-reverse";
-      case "row-reverse":
-        return "flex-row-reverse";
+      case 'row':
+        return 'flex-row';
+      case 'column':
+        return 'flex-col';
+      case 'column-reverse':
+        return 'flex-col-reverse';
+      case 'row-reverse':
+        return 'flex-row-reverse';
       default:
-        return "flex-row";
+        return 'flex-row';
     }
   };
   const containerFlexDirection = flexDirection(direction);
@@ -122,7 +123,7 @@ Flex.defaultProps = {
   fill: true,
   noPadding: false,
   stagger: false,
-  direction: "row",
+  direction: 'row',
   xPadding: undefined,
   yPadding: undefined,
   justify: undefined,

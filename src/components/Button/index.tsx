@@ -1,5 +1,7 @@
-import React from "react";
-import { motion } from "framer-motion";
+import React from 'react';
+
+import { motion } from 'framer-motion';
+
 import {
   BUTTON,
   ROUNDED,
@@ -8,7 +10,7 @@ import {
   TEXT_ALIGN_VARIANTS,
   XPADDING_VARIANT,
   YPADDING_VARIANT,
-} from "entities/tailwind";
+} from 'entities/tailwind';
 
 interface ButtonComponentProps {
   fill?: boolean;
@@ -17,32 +19,32 @@ interface ButtonComponentProps {
   isLoading?: boolean;
   type?: BUTTON;
   align?: TEXT_ALIGN;
-  salt?: React.ComponentProps<"div">["className"];
+  salt?: React.ComponentProps<'div'>['className'];
   noPadding?: boolean;
   yPadding?: SPACING;
   xPadding?: SPACING;
   rounded?: ROUNDED;
-  height?: React.ComponentProps<"div">["className"];
-  width?: React.ComponentProps<"div">["className"];
+  height?: React.ComponentProps<'div'>['className'];
+  width?: React.ComponentProps<'div'>['className'];
 }
 
 const ROUNDED_VARIANT: Record<ROUNDED, string> = {
-  [ROUNDED.NONE]: "rounded-none",
-  [ROUNDED.RESET]: "",
-  [ROUNDED.SMALL]: "rounded-sm",
-  [ROUNDED.MEDIUM]: "rounded-md",
-  [ROUNDED.NORMAL]: "rounded",
-  [ROUNDED.LARGE]: "rounded-lg",
-  [ROUNDED.XL]: "rounded-xl",
-  [ROUNDED.XXL]: "rounded-2xl",
-  [ROUNDED.XXXL]: "rounded-3xl",
-  [ROUNDED.FULL]: "rounded-full",
+  [ROUNDED.NONE]: 'rounded-none',
+  [ROUNDED.RESET]: '',
+  [ROUNDED.SMALL]: 'rounded-sm',
+  [ROUNDED.MEDIUM]: 'rounded-md',
+  [ROUNDED.NORMAL]: 'rounded',
+  [ROUNDED.LARGE]: 'rounded-lg',
+  [ROUNDED.XL]: 'rounded-xl',
+  [ROUNDED.XXL]: 'rounded-2xl',
+  [ROUNDED.XXXL]: 'rounded-3xl',
+  [ROUNDED.FULL]: 'rounded-full',
 };
 
 const BUTTON_VARIANT: Record<BUTTON, string> = {
-  [BUTTON.primary]: "bg-primary text-white",
-  [BUTTON.secondary]: "bg-secondary text-white",
-  [BUTTON.reset]: "",
+  [BUTTON.primary]: 'bg-primary text-white',
+  [BUTTON.secondary]: 'bg-secondary text-white',
+  [BUTTON.reset]: '',
 };
 
 const Button = ({
@@ -63,17 +65,17 @@ const Button = ({
 }: ButtonComponentProps): JSX.Element => {
   const renderButtonContent = () => {
     if (isLoading) {
-      if (typeof type !== "string") {
+      if (typeof type !== 'string') {
         const getLoaderColor = (buttonType: BUTTON | string): string => {
           switch (buttonType) {
             case BUTTON.primary:
-              return "dark:text-gray-100";
+              return 'dark:text-gray-100';
             case BUTTON.reset:
-              return "dark:text-gray-300";
+              return 'dark:text-gray-300';
             case BUTTON.secondary:
-              return "dark:text-gray-300";
+              return 'dark:text-gray-300';
             default:
-              return "dark:text-gray-100";
+              return 'dark:text-gray-100';
           }
         };
 
@@ -131,9 +133,7 @@ const Button = ({
 
   // Border Radius
   const borderRounded =
-    rounded !== undefined
-      ? ROUNDED_VARIANT[rounded]
-      : ROUNDED_VARIANT[ROUNDED.XXXL];
+    rounded !== undefined ? ROUNDED_VARIANT[rounded] : ROUNDED_VARIANT[ROUNDED.XXXL];
 
   // Paddings
   const buttonYPadding =
@@ -141,26 +141,24 @@ const Button = ({
       ? YPADDING_VARIANT[yPadding]
       : YPADDING_VARIANT[SPACING.extraSmall];
   const buttonXPadding =
-    xPadding !== undefined
-      ? XPADDING_VARIANT[xPadding]
-      : XPADDING_VARIANT[SPACING.large];
-  const buttonPadding = noPadding ? "" : `${buttonXPadding} ${buttonYPadding}`;
+    xPadding !== undefined ? XPADDING_VARIANT[xPadding] : XPADDING_VARIANT[SPACING.large];
+  const buttonPadding = noPadding ? '' : `${buttonXPadding} ${buttonYPadding}`;
 
   // Button Color
   const buttonColor =
     type === undefined ? BUTTON_VARIANT[BUTTON.primary] : BUTTON_VARIANT[type];
 
-  const buttonHeight = height ?? "h-fit"; // Button Area -> Height
+  const buttonHeight = height ?? 'h-fit'; // Button Area -> Height
 
-  const buttonWidth = width ?? "min-w-fit"; // Button Area -> Width
-  const buttonFullWidth = fill ? "w-full" : buttonWidth;
+  const buttonWidth = width ?? 'min-w-fit'; // Button Area -> Width
+  const buttonFullWidth = fill ? 'w-full' : buttonWidth;
   const buttonArea = `${buttonHeight} ${buttonFullWidth}`; // Button Area - Width x Height
 
   // Button Spacing
   const buttonSpacing = `${buttonArea} ${buttonPadding.trim()}`;
 
   // Custom Tailwind Styles
-  const addOn = salt !== undefined ? salt.trim() : "";
+  const addOn = salt !== undefined ? salt.trim() : '';
 
   // Final Classname
   const newClassName = `${buttonSpacing.trim()} ${align} ${buttonColor.trim()} 
@@ -184,7 +182,7 @@ const Button = ({
 Button.defaultProps = {
   fill: false,
   isLoading: false,
-  label: "Button Label",
+  label: 'Button Label',
   onClick: () => null,
   type: BUTTON.primary,
   align: TEXT_ALIGN.center,

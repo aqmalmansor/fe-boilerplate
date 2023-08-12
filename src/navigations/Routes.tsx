@@ -1,8 +1,8 @@
-import { FunctionComponent } from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { FunctionComponent } from 'react';
+import { Navigate, Route, Routes } from 'react-router-dom';
 
-import HomePage from "containers/Home";
-import PlaygroundPage from "containers/Playground";
+import HomePage from 'containers/Home';
+import PlaygroundPage from 'containers/Playground';
 
 const NavRoutes: FunctionComponent = () => {
   const enableTest = true;

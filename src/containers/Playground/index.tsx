@@ -1,6 +1,7 @@
-import { useState } from "react";
-import Button from "components/Button";
-import Modal from "components/Modal";
+import { useState } from 'react';
+
+import Button from 'components/Button';
+import Modal from 'components/Modal';
 
 const Playground = () => {
   const [isOpen, setIsOpen] = useState(false);

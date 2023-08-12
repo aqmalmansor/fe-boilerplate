@@ -1,7 +1,8 @@
-import AppRoot from "./containers/AppRoot";
+import { useEffect } from 'react';
 
-import packageJson from "../package.json";
-import { useEffect } from "react";
+import AppRoot from './containers/AppRoot';
+
+import packageJson from '../package.json';
 
 const App = () => {
   useEffect(() => {

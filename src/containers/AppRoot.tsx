@@ -1,6 +1,6 @@
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence } from 'framer-motion';
 
-import Routes from "navigations/Routes";
+import Routes from 'navigations/Routes';
 
 const AppRoot = () => {
   return (

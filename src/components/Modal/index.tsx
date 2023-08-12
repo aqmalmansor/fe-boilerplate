@@ -1,20 +1,23 @@
-import React from "react";
-import { Variants, motion } from "framer-motion";
-import SVG from "react-inlinesvg";
+import React from 'react';
+import SVG from 'react-inlinesvg';
 
-import Button from "components/Button";
-import Backdrop from "./Backdrop";
+import { Variants, motion } from 'framer-motion';
 
-import Motion from "utils/Motion";
+import { BUTTON } from 'entities/tailwind';
 
-import icons from "assets/icons";
-import { BUTTON } from "entities/tailwind";
+import Button from 'components/Button';
+
+import icons from 'assets/icons';
+
+import Motion from 'utils/Motion';
+
+import Backdrop from './Backdrop';
 
 interface ModalComponentProps {
   variants?: Variants;
   children: React.ReactNode;
   onClick: () => void;
-  height?: React.ComponentProps<"div">["className"];
+  height?: React.ComponentProps<'div'>['className'];
 }
 
 const Modal = ({
@@ -25,8 +28,7 @@ const Modal = ({
 }: ModalComponentProps): JSX.Element => {
   const modalAnimation = variants !== undefined ? variants : undefined;
 
-  const modalHeight =
-    height && height.length ? height : "min-h-[min(50%,300px)]";
+  const modalHeight = height && height.length ? height : 'min-h-[min(50%,300px)]';
 
   return (
     <Backdrop onClick={onClick}>
@@ -40,9 +42,7 @@ const Modal = ({
       >
         <div className="absolute right-0 top-0">
           <Button
-            label={
-              <SVG src={icons.closeSVG} fill="#7E7E7E" width={20} height={20} />
-            }
+            label={<SVG src={icons.closeSVG} fill="#7E7E7E" width={20} height={20} />}
             fill={false}
             type={BUTTON.reset}
             salt="p-3 inline-flex items-center justify-center cursor-pointer"
