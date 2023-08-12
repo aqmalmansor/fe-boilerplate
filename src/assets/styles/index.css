@@ -2,16 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-html,
-body {
-  overflow-x: hidden;
-  scroll-behavior: smooth;
-}
-
-body {
-  position: relative;
-}
-
 @layer base {
   :root {
     --color-primary: 255 115 179;

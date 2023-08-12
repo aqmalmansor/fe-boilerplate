@@ -42,11 +42,11 @@ const Modal = ({
       >
         <div className="absolute right-0 top-0">
           <Button
-            label={<SVG src={icons.closeSVG} fill="#7E7E7E" width={20} height={20} />}
             fill={false}
-            type={BUTTON.reset}
-            salt="p-3 inline-flex items-center justify-center cursor-pointer"
+            variant={BUTTON.reset}
             onClick={() => onClick()}
+            label={<SVG src={icons.closeSVG} fill="#7E7E7E" width={20} height={20} />}
+            salt="p-3 inline-flex items-center justify-center cursor-pointer"
           />
         </div>
         {children}
