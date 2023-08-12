@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { motion } from 'framer-motion';
-
 import {
   ALIGN_ITEMS,
   ALIGN_ITEMS_VARIANT,
@@ -12,8 +10,6 @@ import {
   XPADDING_VARIANT,
   YPADDING_VARIANT,
 } from 'entities/tailwind';
-
-import Motion from 'utils/Motion';
 
 interface FlexComponentProps {
   id?: string;
@@ -27,7 +23,6 @@ interface FlexComponentProps {
   direction?: 'row' | 'column' | 'column-reverse' | 'row-reverse';
   gap?: SPACING;
   salt?: React.ComponentProps<'div'>['className'];
-  stagger?: boolean;
   style?: React.CSSProperties;
 }
 
@@ -43,7 +38,6 @@ const Flex = ({
   align,
   gap,
   salt,
-  stagger,
   style,
 }: FlexComponentProps): JSX.Element => {
   const fillContainer = fill ? 'flex w-full h-full' : 'inline-flex';
@@ -90,27 +84,18 @@ const Flex = ({
   };
   const containerFlexDirection = flexDirection(direction);
 
-  const newClass = `${fillContainer} ${justifyContent} ${alignItems} ${containerFlexDirection}
-   ${containerGap} ${containerPadding.trim()} ${containerSalt.trim()}`;
-
-  if (stagger) {
-    return (
-      <motion.div
-        id={id}
-        style={style}
-        initial="hidden"
-        whileInView="show"
-        className={newClass.trim()}
-        viewport={{ once: true, amount: 0.1 }}
-        variants={Motion.staggerContainer(0.3, 1)}
-      >
-        {children}
-      </motion.div>
-    );
-  }
+  const newClassname = [
+    fillContainer,
+    justifyContent,
+    alignItems,
+    containerFlexDirection,
+    containerGap,
+    containerPadding.trim(),
+    containerSalt.trim(),
+  ].join(' ');
 
   return (
-    <div id={id} className={newClass.trim()} style={style}>
+    <div id={id} className={newClassname.trim()} style={style}>
       {children}
     </div>
   );
@@ -122,7 +107,6 @@ Flex.defaultProps = {
   id: undefined,
   fill: true,
   noPadding: false,
-  stagger: false,
   direction: 'row',
   xPadding: undefined,
   yPadding: undefined,
