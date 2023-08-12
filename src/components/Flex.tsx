@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { LegacyRef, forwardRef } from 'react';
 
 import {
   ALIGN_ITEMS,
@@ -26,80 +26,84 @@ interface FlexComponentProps {
   style?: React.CSSProperties;
 }
 
-const Flex = ({
-  id,
-  children,
-  fill,
-  noPadding,
-  direction,
-  xPadding,
-  yPadding,
-  justify,
-  align,
-  gap,
-  salt,
-  style,
-}: FlexComponentProps): JSX.Element => {
-  const fillContainer = fill ? 'flex w-full h-full' : 'inline-flex';
+const Flex = forwardRef(
+  (props: FlexComponentProps, ref: LegacyRef<HTMLDivElement>): JSX.Element => {
+    const {
+      id,
+      children,
+      fill,
+      noPadding,
+      direction,
+      xPadding,
+      yPadding,
+      justify,
+      align,
+      gap,
+      salt,
+      style,
+    } = props;
 
-  const containerXPadding =
-    xPadding !== undefined
-      ? XPADDING_VARIANT[xPadding]
-      : XPADDING_VARIANT[SPACING.default];
-  const containerYPadding =
-    yPadding !== undefined
-      ? YPADDING_VARIANT[yPadding]
-      : YPADDING_VARIANT[SPACING.default];
-  const containerDefaultPadding = `${containerXPadding} ${containerYPadding}`;
-  const containerPadding = noPadding ? '' : containerDefaultPadding.trim();
+    const fillContainer = fill ? 'flex w-full h-full' : 'inline-flex';
 
-  const justifyContent =
-    justify !== undefined
-      ? JUSTIFY_CONTENT_VARIANT[justify]
-      : JUSTIFY_CONTENT_VARIANT[JUSTIFY_CONTENT.start];
+    const containerXPadding =
+      xPadding !== undefined
+        ? XPADDING_VARIANT[xPadding]
+        : XPADDING_VARIANT[SPACING.default];
+    const containerYPadding =
+      yPadding !== undefined
+        ? YPADDING_VARIANT[yPadding]
+        : YPADDING_VARIANT[SPACING.default];
+    const containerDefaultPadding = `${containerXPadding} ${containerYPadding}`;
+    const containerPadding = noPadding ? '' : containerDefaultPadding.trim();
 
-  const alignItems =
-    align !== undefined
-      ? ALIGN_ITEMS_VARIANT[align]
-      : ALIGN_ITEMS_VARIANT[ALIGN_ITEMS.center];
+    const justifyContent =
+      justify !== undefined
+        ? JUSTIFY_CONTENT_VARIANT[justify]
+        : JUSTIFY_CONTENT_VARIANT[JUSTIFY_CONTENT.start];
 
-  const containerGap =
-    gap !== undefined ? GAP_VARIANT[gap] : GAP_VARIANT[SPACING.default];
+    const alignItems =
+      align !== undefined
+        ? ALIGN_ITEMS_VARIANT[align]
+        : ALIGN_ITEMS_VARIANT[ALIGN_ITEMS.center];
 
-  const containerSalt = salt !== undefined ? salt : '';
+    const containerGap =
+      gap !== undefined ? GAP_VARIANT[gap] : GAP_VARIANT[SPACING.default];
 
-  const flexDirection = (dir: FlexComponentProps['direction']) => {
-    switch (dir) {
-      case 'row':
-        return 'flex-row';
-      case 'column':
-        return 'flex-col';
-      case 'column-reverse':
-        return 'flex-col-reverse';
-      case 'row-reverse':
-        return 'flex-row-reverse';
-      default:
-        return 'flex-row';
-    }
-  };
-  const containerFlexDirection = flexDirection(direction);
+    const containerSalt = salt !== undefined ? salt : '';
 
-  const newClassname = [
-    fillContainer,
-    justifyContent,
-    alignItems,
-    containerFlexDirection,
-    containerGap,
-    containerPadding.trim(),
-    containerSalt.trim(),
-  ].join(' ');
+    const flexDirection = (dir: FlexComponentProps['direction']) => {
+      switch (dir) {
+        case 'row':
+          return 'flex-row';
+        case 'column':
+          return 'flex-col';
+        case 'column-reverse':
+          return 'flex-col-reverse';
+        case 'row-reverse':
+          return 'flex-row-reverse';
+        default:
+          return 'flex-row';
+      }
+    };
+    const containerFlexDirection = flexDirection(direction);
 
-  return (
-    <div id={id} className={newClassname.trim()} style={style}>
-      {children}
-    </div>
-  );
-};
+    const newClassname = [
+      fillContainer,
+      justifyContent,
+      alignItems,
+      containerFlexDirection,
+      containerGap,
+      containerPadding.trim(),
+      containerSalt.trim(),
+    ].join(' ');
+
+    return (
+      <div id={id} className={newClassname.trim()} style={style} ref={ref}>
+        {children}
+      </div>
+    );
+  },
+);
 
 export default Flex;
 
